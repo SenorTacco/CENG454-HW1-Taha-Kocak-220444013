@@ -1,5 +1,5 @@
 // FlightController.cs
-// CENG 454 – HW1: Sky-High Prototype
+// CENG 454 - HW1: Sky-High Prototype
 // Author: Taha Kocak | Student ID: 220444013
 
 using UnityEngine;
@@ -19,6 +19,7 @@ public class FlightController : MonoBehaviour
         // Task 3-B: Cache Rigidbody and disable physics-driven rotation
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        
     }
 
     void Update()
@@ -29,15 +30,15 @@ public class FlightController : MonoBehaviour
 
     private void HandleRotation()
     {
-        // Pitch — Arrow Up/Down rotates around the X-axis
+        // Task 3-C: Pitch Arrow Up/Down rotates around the X-axis (Vector3.right)
         float pitch = Input.GetAxis("Vertical") * pitchSpeed * Time.deltaTime;
         transform.Rotate(Vector3.right, pitch);
 
-        // Yaw — Arrow Left/Right rotates around the Y-axis
+        // Task 3-C: Yaw Arrow Left/Right rotates around the Y-axis (Vector3.up)
         float yaw = Input.GetAxis("Horizontal") * yawSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up, yaw);
 
-        // Roll — Q/E keys rotate around the Z-axis
+        // Task 3-C: Roll Q/E keys rotate around the Z-axis (Vector3.forward)
         float roll = 0f;
         if (Input.GetKey(KeyCode.Q))
             roll = rollSpeed * Time.deltaTime;
@@ -48,6 +49,11 @@ public class FlightController : MonoBehaviour
 
     private void HandleThrust()
     {
-        // TODO (Task 3-D): Thrust will be added in a later commit
+        // Task 3-D: Thrust Spacebar moves the aircraft forward along its local Z-axis
+        if (Input.GetKey(KeyCode.Space))
+        {
+            transform.Translate(Vector3.forward * thrustSpeed * Time.deltaTime);
+        }
     }
 }
+
